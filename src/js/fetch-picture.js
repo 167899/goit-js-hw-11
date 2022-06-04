@@ -103,6 +103,7 @@ async function fetchPicture(input) {
       captionsData: 'alt',
       captionDelay: 250,
     });
+
     lightbox.refresh();
   } catch (error) {
     console.log(error.message);
