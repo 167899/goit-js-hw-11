@@ -73,7 +73,10 @@ async function fetchPicture(input) {
       } else {
         picture.insertAdjacentHTML('beforeend', elements);
       }
-      if (picture.childElementCount >= '40' && picture.childElementCount <= '500') {
+      if (
+        picture.childElementCount >= option.params.per_page &&
+        picture.childElementCount <= myData.data.totalHits
+      ) {
         btnLoadMore.classList.remove('unvisible');
         console.log(myData.data.hits.length);
       } else {
