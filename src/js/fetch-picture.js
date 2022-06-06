@@ -1,4 +1,4 @@
-export default function fetchPicture(input, key, page) {
+export default function fetchPicture(input, key, page, pre_page) {
   const URL = 'https://pixabay.com/api/';
   const option = {
     params: {
@@ -7,7 +7,7 @@ export default function fetchPicture(input, key, page) {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: '40',
+      per_page: `${pre_page}`,
       page: `${page}`,
     },
   };

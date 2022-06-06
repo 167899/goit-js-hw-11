@@ -8,26 +8,27 @@ const picture = document.querySelector('.gallery');
 const btnLoadMore = document.querySelector('.load-more');
 const inputSearch = document.querySelector('.search-input');
 const formSearch = document.querySelector('.search-form');
-const key = '27831105-5e5b5e1ddfe0fd39cdbde4893';
 
-export let page = 1;
+const key = '27831105-5e5b5e1ddfe0fd39cdbde4893';
+const pre_page = 40;
+let page = 1;
 
 formSearch.addEventListener('submit', event => {
   event.preventDefault();
   page = 1;
-  render(inputSearch.value, key, page);
+  render(inputSearch.value, key, page, pre_page);
 });
 
 btnLoadMore.addEventListener('click', () => {
   page = page + 1;
-  render(inputSearch.value, key, page);
+  render(inputSearch.value, key, page, pre_page);
   // console.log('hi', page);
   return page;
 });
 
-async function render(input, key, page) {
+async function render(input, key, page, pre_page) {
   try {
-    const myData = await fetchPicture(input, key, page);
+    const myData = await fetchPicture(input, key, page, pre_page);
     console.log(myData);
     if (myData.data.total !== 0) {
       let elements = myData.data.hits
@@ -60,7 +61,10 @@ async function render(input, key, page) {
       } else {
         picture.insertAdjacentHTML('beforeend', elements);
       }
-      if (picture.childElementCount >= '40' && picture.childElementCount < myData.data.totalHits) {
+      if (
+        picture.childElementCount >= pre_page &&
+        picture.childElementCount < myData.data.totalHits
+      ) {
         btnLoadMore.classList.remove('unvisible');
         console.log(myData.data.totalHits);
         console.log(picture.childElementCount);
