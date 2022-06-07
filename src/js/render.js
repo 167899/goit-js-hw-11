@@ -16,7 +16,9 @@ let page = 1;
 formSearch.addEventListener('submit', event => {
   event.preventDefault();
   page = 1;
-  render(inputSearch.value, key, page, pre_page);
+  if (inputSearch.value !== '') {
+    render(inputSearch.value, key, page, pre_page);
+  }
 });
 
 btnLoadMore.addEventListener('click', () => {
